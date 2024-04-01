@@ -1,0 +1,14 @@
+workers:
+    tailwind:
+        type: tailwind
+        env: ['APP_ENV=dev', 'APP_DEBUG=1']
+        php: '8.0'
+        web: 'nginx'
+        config: 'tailwind.config.js'
+        watch: ['assets']
+        output: 'public/build'
+        public: 'public'
+        entrypoints: ['app']
+        dev-server: 
+        version: '3'
+        cmd: ['symfony', 'console', 'tailwind:build', '--watch']

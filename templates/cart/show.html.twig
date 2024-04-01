@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Commande
+{% endblock %}
+
+{% block body %}
+	<div class="flex flex-col gap-4 justify-center items-center" style="margin: 64px 0; gap: 24px;">
+		<h2>Détail de la commande</h2>
+		{% if cart is defined %}
+			<div class="max-w-7xl mx-auto px-4 pb-12 sm:px-6 lg:px-8 mt-6">
+				<div class="bg-white rounded-lg p-4">
+					<h4 class="font-semibold text-lg">Commande du
+						{{ cart.dateOfPurchase|date('d/m/Y') }}</h4>
+					<p class="text-gray-600">Cette commande porte l'id :
+						{{cart.id}}</p>
+					{% if products is not empty %}
+						<h5 class="font-semibold text-md mt-4 mb-2">Produits de la commande :</h5>
+						<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+							{% for product in products %}
+								<div class="bg-white border border-gray-200 hover:shadow-lg rounded-3xl overflow-hidden flex flex-col transition-shadow duration-300 ease-in-out">
+									<a href="{{ path('app_product_show', {'id': product.product.id}) }}" class="flex flex-col h-full">
+										<img src="{{ asset('uploads/' ~ product.product.image) }}" alt="{{ product.product.name }}" class="h-48 w-full object-contain">
+										<div class="p-4 flex flex-col flex-grow">
+											<div class="text-lg font-semibold mb-2">{{ product.product.name }}</div>
+											<p class="text-gray-500 text-sm flex-grow" style="display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;">{{ product.product.description }}</p>
+											<div class="mt-4 font-bold">Prix:
+												{{ product.product.price }}€</div>
+											<div>Disponibilité:
+												{{ product.product.supply }}</div>
+										</div>
+									</a>
+								</div>
+							{% endfor %}
+						</div>
+					{% else %}
+						<p class="text-gray-600 mt-4">Aucun produit dans cette commande</p>
+					{% endif %}
+				</div>
+			</div>
+		{% endif %}
+	</div>
+{% endblock %}

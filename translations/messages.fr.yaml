@@ -1,0 +1,10 @@
+# messages.fr.yaml
+
+show: Afficher
+
+Nom: Nom
+
+category:
+  title: Catégories
+  added: Catégorie ajoutée
+  nb: Il y a X catégories

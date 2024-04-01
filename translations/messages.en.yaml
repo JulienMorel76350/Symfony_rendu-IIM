@@ -1,0 +1,10 @@
+# messages.en.yaml
+
+show: Show
+
+Nom: Name
+
+category:
+  title: Categories
+  added: Category added
+  nb: There is X categories

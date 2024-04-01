@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Product!{% endblock %}
+
+
+{% block body %}
+	<div class="max-w-7xl mx-auto py-4 px-4 p-12 sm:px-6 lg:px-8 mt-6 bg-gray-200 rounded-3xl">
+		<div class="flex justify-between items-center mb-6">
+			<h1 class="text-3xl font-bold text-gray-900">Les différents produits</h1>
+		</div>
+		<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+			{% for product in products %}
+				<div class="bg-white border rounded-2xl border-gray-200 hover:shadow-lg overflow-hidden flex flex-col ">
+                    <a href="{{ path('app_product_show', {'id': product.id}) }}" class="flex flex-col h-full">
+						<div class="px-4 py-1 bg-lime-200 flex">
+							<div class="text-xl font-bold">{{ product.name }}</div>
+                        </div>
+                        <div class="px-4 py-2 flex-grow flex">
+							<p class="text-gray-600 text-sm flex-grow overflow-hidden" style="display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;">{{ product.description }}</p>
+							<div class="mt-4 gap-2 flex">Prix:
+								{{ product.price }}€
+							Disponibilité:
+								{{ product.supply }}</div>
+						</div>
+						<img src="{{ asset('uploads/' ~ product.image) }}" alt="{{ product.name }}" class="h-48 w-full object-contain">
+					</a>
+				</div>
+			{% else %}
+				<div class="col-span-full text-center text-gray-500">Aucun produit trouvé</div>
+			{% endfor %}
+		</div>
+	</div>
+{% endblock %}

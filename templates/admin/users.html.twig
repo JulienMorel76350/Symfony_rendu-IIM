@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello SuperAdminController!{% endblock %}
+
+{% block body %}
+<div class="flex flex-col items-center my-8">
+    <h1 class="text-3xl font-bold text-gray-900">Utilisateurs</h1>
+    <p class="text-md text-gray-500 mt-2">
+        Liste des utilisateurs enregistrés dans la base de données.
+    </p>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Email</th>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Roles</th>
+            <th>Créé le</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>
+                        {% if user.lastName %}
+                            {{ user.lastName }}
+                        {% else %}
+                            <span class="text-red-500">Non renseigné</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if user.firstName %}
+                            {{ user.firstName }}
+                        {% else %}
+                            <span class="text-red-500">Non renseigné</span>
+                        {% endif %}
+                    </td>
+                    <td>{{ user.roles | join(', ') }}</td>
+                    <td>
+                        {% if user.createdAt|date('Y') > 0 %}
+                            {{ user.createdAt|date('d/m/Y H:i:s') }}
+                        {% else %}
+                            <span class="text-red-500">Non renseigné</span>
+                        {% endif %}
+                    </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td>Il n'y a aucun Utilisatuer</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
